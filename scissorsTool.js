@@ -1,11 +1,15 @@
+// Tool for cutting, copying, and pasting parts of the canvas
 function ScissorsTool() {
+    // Tool identification and state
     this.name = "scissors";
     this.icon = "assets/scissors.png";
     
-    this.selectMode = 0;
+    // Selection state tracking
+    this.selectMode = 0;  // 0: idle, 1: selecting, 2: moving selection
     this.selectedArea = {x: 0, y:0, w: 0, h: 0};
     this.selectedPixels = null;
 
+    // Render selection rectangle or moving selection
     this.draw = function() {
         if(this.selectMode === 1) {
             // Draw selection rectangle on top without affecting pixels
@@ -28,11 +32,12 @@ function ScissorsTool() {
         }
     };
 
-    // Helper function for dashed lines
+    // Create dashed line effect for selection rectangle
     function setLineDash(list) {
         drawingContext.setLineDash(list);
     }
 
+    // Handle start of selection or paste operation
     this.mousePressed = function() {
         if(this.selectMode === 1 && !this.selectedArea.isDrawn) {
             loadPixels();
@@ -51,6 +56,7 @@ function ScissorsTool() {
         }
     };
 
+    // Update selection size while dragging
     this.mouseDragged = function() {
         if(this.selectMode === 1 && !this.selectedArea.isDrawn) {
             this.selectedArea.w = mouseX - this.selectedArea.x;
@@ -58,6 +64,7 @@ function ScissorsTool() {
         }
     };
 
+    // Finalize selection area
     this.mouseReleased = function() {
         if(this.selectMode === 1 && !this.selectedArea.isDrawn) {
             // Normalize selection coordinates
@@ -84,22 +91,43 @@ function ScissorsTool() {
         }
     };
 
+    // Handle escape key to cancel operation
+    this.keyPressed = function(event) {
+        // Check if Escape key is pressed
+        if (event.keyCode === 27) { // 27 is the keyCode for Escape
+            this.selectMode = 0;
+            this.selectedArea = {
+                x: 0, 
+                y: 0, 
+                w: 0, 
+                h: 0, 
+                isDrawn: false
+            };
+            // Update button text if it exists
+            let button = document.querySelector('.options .tool-button');
+            if (button) {
+                button.innerHTML = "Select Area";
+            }
+            this.selectedPixels = null;
+            loadPixels();
+        }
+    };
+
+    // Create scissors tool interface
     this.populateOptions = function() {
-        // Clear existing options
         var optionsDiv = document.querySelector(".options");
         if (!optionsDiv) return;
         optionsDiv.innerHTML = "";
         
-        // Create button using DOM directly first
+        // Create button container
+        var buttonContainer = document.createElement('div');
+        buttonContainer.className = 'tool-button-container';
+        
         var button = document.createElement('button');
-        button.innerHTML = 'select area';
-        button.style.padding = '5px';
-        button.style.margin = '5px';
-        button.style.fontSize = '12px';
-        button.style.backgroundColor = '#fff';
-        button.style.border = '1px solid #000';
-        button.style.cursor = 'pointer';
-        optionsDiv.appendChild(button);
+        button.innerHTML = 'Select Area';
+        button.className = 'tool-button';
+        buttonContainer.appendChild(button);
+        optionsDiv.appendChild(buttonContainer);
         
         var self = this;
         button.addEventListener('click', function() {
@@ -152,6 +180,7 @@ function ScissorsTool() {
         });
     };
 
+    // Cleanup when tool is deselected
     this.unselectTool = function() {
         select(".options").html("");
         this.selectMode = 0;

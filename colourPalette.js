@@ -1,7 +1,9 @@
+// Manages color selection for drawing tools
 function ColourPalette() {
+    // Store current color
     this.selectedColour = "#000000";
-    var self = this;
-
+    
+    // Create color picker interface
     this.loadColours = function() {
         var palette = select('.colourPalette');
         
@@ -25,15 +27,16 @@ function ColourPalette() {
             .class('colourPicker-tooltip')
             .parent(wrapper);
         
-        picker.input(function() {
-            self.selectedColour = this.value();
-            fill(self.selectedColour);
-            stroke(self.selectedColour);
+        picker.input(() => {
+            this.selectedColour = picker.value();
+            fill(this.selectedColour);
+            stroke(this.selectedColour);
         });
 
         fill(this.selectedColour);
         stroke(this.selectedColour);
     };
 
+    // Initialize on creation
     this.loadColours();
 }

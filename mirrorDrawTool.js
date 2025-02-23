@@ -1,25 +1,22 @@
+// Tool for drawing with mirror symmetry effect
 function mirrorDrawTool() {
+    // Tool identification
     this.name = "mirrorDraw";
     this.icon = "assets/mirrorDraw.jpg";
 
-    //which axis is being mirrored (x or y) x is default
-    this.axis = "x";
-    //line of symmetry is halfway across the screen
-    this.lineOfSymmetry = width / 2;
+    // Mirror configuration
+    this.axis = "x";  // Current mirror axis
+    this.lineOfSymmetry = width / 2;  // Position of mirror line
 
-    //this changes in the jquery click handler. So storing it as
-    //a variable self now means we can still access it in the handler
     var self = this;
 
-    //where was the mouse on the last time draw was called.
-    //set it to -1 to begin with
+    // Track previous drawing points
     var previousMouseX = -1;
     var previousMouseY = -1;
-
-    //mouse coordinates for the other side of the Line of symmetry.
     var previousOppositeMouseX = -1;
     var previousOppositeMouseY = -1;
 
+    // Draw mirrored lines
     this.draw = function() {
         //display the last save state of pixels
         updatePixels();
@@ -76,7 +73,7 @@ function mirrorDrawTool() {
         pop();
     };
 
-    // Calculate an opposite coordinate the other side of the symmetry line. 
+    // Calculate mirrored point position
     this.calculateOpposite = function(n, a) {
         if (a != this.axis) {
             return n;
@@ -96,33 +93,34 @@ function mirrorDrawTool() {
         }
     };
 
-    // when the tool is deselected update the pixels to just show the drawing and
-    // hide the line of symmetry. Also clear options
+    // Cleanup when tool is deselected
     this.unselectTool = function() {
         updatePixels();
         //clear options
         select(".options").html("");
     };
 
-    // adds a button and click handler to the options area. When clicked
-    // toggle the line of symmetry between horizontal to vertical
+    // Create mirror tool interface
     this.populateOptions = function() {
-        // Store initial state when tool is selected
-        drawingState = get();
+        let buttonContainer = createDiv();
+        buttonContainer.class('tool-button-container');
+        buttonContainer.parent(select(".options"));
         
-        select(".options").html("<button id='directionButton'>Make Horizontal</button>");
-        select("#directionButton").mouseClicked(function() {
-            var button = select("#" + this.elt.id);
+        let directionButton = createButton('Make Horizontal');
+        directionButton.class('tool-button');
+        directionButton.id('directionButton');
+        directionButton.parent(buttonContainer);
+        
+        directionButton.mouseClicked(function() {
             if (self.axis == "x") {
                 self.axis = "y";
                 self.lineOfSymmetry = height / 2;
-                button.html('Make Vertical');
+                this.html('Make Vertical');
             } else {
                 self.axis = "x";
                 self.lineOfSymmetry = width / 2;
-                button.html('Make Horizontal');
+                this.html('Make Horizontal');
             }
-            debugLog('Changed mirror axis to: ' + self.axis);
         });
     };
 }

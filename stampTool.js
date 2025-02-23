@@ -1,22 +1,19 @@
 function StampTool() {
+    // Tool identification
     this.name = "stampTool";
     this.icon = "assets/star.png";
     
-    // Define star as a property of the tool
+    // Store current stamp image and settings
     this.star = null;
-    
-    // Load the image when the tool is created
-    this.star = loadImage('./assets/star.png');
-    
-    // Create properties for the sliders
     this.starSizeSlider = null;
     this.nStarSlider = null;
     this.transparencySlider = null;
     
-    // Add timestamp property
+    // Control rapid stamping
     this.lastStampTime = 0;
-    const STAMP_DELAY = 150; // Minimum milliseconds between stamps
+    const STAMP_DELAY = 150;
     
+    // Create tool interface
     this.populateOptions = function() {
         select(".options").html("");
         
@@ -107,6 +104,7 @@ function StampTool() {
         opacityGroup.parent(controlsContainer);
     };
   
+    // Handle stamping on canvas
     this.draw = function() {
         if (mouseIsPressed && this.star) {
             if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {

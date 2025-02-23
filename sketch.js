@@ -1,25 +1,21 @@
-//global variables that will store the toolbox colour palette
-//and the helper functions
+// Store main application components
 var toolbox = null;
 var colourP = null;
 var helpers = null;
-var DEBUG = true; // Add debug flag
 
 function setup() {
-    //create a canvas to fill the content div from index.html
+    // Initialize canvas
     canvasContainer = select('#content');
     var c = createCanvas(canvasContainer.size().width, canvasContainer.size().height);
-    c.attribute('willReadFrequently', true);  // Add this attribute to optimize pixel operations
+    c.attribute('willReadFrequently', true);  // Optimize for pixel operations
     c.parent("content");
 
-    //create helper functions and the colour palette
+    // Initialize core components
     helpers = new HelperFunctions();
     colourP = new ColourPalette();
-
-    //create a toolbox for storing the tools
     toolbox = new Toolbox();
 
-    //add the tools to the toolbox.
+    // Add all drawing tools
     toolbox.addTool(new FreehandTool());
     toolbox.addTool(new LineToTool());
     toolbox.addTool(new SprayCanTool());
@@ -28,6 +24,7 @@ function setup() {
     toolbox.addTool(new ShapesTool("icons/shapes.png"));
     toolbox.addTool(new ScissorsTool());
 
+    // Set up initial canvas state
     background(255);
     loadPixels();
 
@@ -43,45 +40,40 @@ function setup() {
     });
 }
 
-// Add debug logging function
-function debugLog(message) {
-    if (DEBUG) {
-        console.log('[DEBUG] ' + message);
-    }
-}
-
+// Main draw loop - handles active tool drawing
 function draw() {
-    //call the draw function from the selected tool.
-    //hasOwnProperty is a javascript function that tests
-    //if an object contains a particular method or property
-    //if there isn't a draw method the app will alert the user
-    if (toolbox.selectedTool.hasOwnProperty("draw")) {
+    if (toolbox && toolbox.selectedTool && toolbox.selectedTool.hasOwnProperty("draw")) {
         toolbox.selectedTool.draw();
-    } else {
-        alert("it doesn't look like your tool has a draw method!");
     }
 }
 
+// Mouse event handlers - delegate to active tool
 function mousePressed() {
-    if (toolbox.selectedTool.hasOwnProperty("mousePressed")) {
+    if (toolbox && toolbox.selectedTool && toolbox.selectedTool.hasOwnProperty("mousePressed")) {
         toolbox.selectedTool.mousePressed();
     }
 }
 
 function mouseDragged() {
-    if (toolbox.selectedTool.hasOwnProperty("mouseDragged")) {
+    if (toolbox && toolbox.selectedTool && toolbox.selectedTool.hasOwnProperty("mouseDragged")) {
         toolbox.selectedTool.mouseDragged();
     }
 }
 
 function mouseReleased() {
-    if (toolbox.selectedTool.hasOwnProperty("mouseReleased")) {
+    if (toolbox && toolbox.selectedTool && toolbox.selectedTool.hasOwnProperty("mouseReleased")) {
         toolbox.selectedTool.mouseReleased();
     }
 }
 
-// Add window error handler
-window.onerror = function(msg, url, lineNo, columnNo, error) {
-    console.log('Error: ' + msg + '\nURL: ' + url + '\nLine: ' + lineNo + '\nColumn: ' + columnNo + '\nError object: ' + JSON.stringify(error));
+function keyPressed() {
+    if (toolbox && toolbox.selectedTool && toolbox.selectedTool.hasOwnProperty("keyPressed")) {
+        toolbox.selectedTool.keyPressed(window.event);
+    }
+}
+
+// Simplify error handler to just log the error message
+window.onerror = function(msg) {
+    console.error('Error:', msg);
     return false;
 };

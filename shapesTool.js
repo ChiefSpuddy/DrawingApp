@@ -1,19 +1,21 @@
+// Tool for drawing and editing custom shapes
 function ShapesTool() {
+    // Tool identification and state
     this.name = "shapes";
     this.icon = "assets/shapes.png";
     this.editMode = false;
     this.currentShape = [];
 
-    // Function to calculate the opposite point based on the axis
+    // Main drawing and shape manipulation function
     this.draw = function() {
-        // Remove clear() and background() calls
+        // Prevent drawing outside canvas
         if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) {
             return;
         }
 
         updatePixels(); // Restore previous state
         
-        // Draw current shape
+        // Render current shape and edit points
         if (this.currentShape.length > 0) {
             push();
             strokeWeight(2);
@@ -35,14 +37,11 @@ function ShapesTool() {
             pop();
         }
         
-        // Rest of the draw function...
-        //Wrote by Sam May
-        // Draw the options panel
+        // Handle point addition and editing
         if (mouseIsPressed) {
             if (!this.editMode) {
                 this.currentShape.push({ x: mouseX, y: mouseY });
             } else {
-                // Improved multi-point editing
                 let pointMoved = false;
                 for (let i = this.currentShape.length - 1; i >= 0; i--) {
                     if (!pointMoved && dist(this.currentShape[i].x, this.currentShape[i].y, mouseX, mouseY) < 20) {
@@ -55,25 +54,23 @@ function ShapesTool() {
         }
     };
 
-    // Function to populate the options panel
+    // Setup shape tool interface controls
     this.populateOptions = function() {
         select(".options").html("");
 
-        //Button container
-        let buttonContainer = createDiv('');
+        let buttonContainer = createDiv();
+        buttonContainer.class('tool-button-container');
         buttonContainer.parent(select(".options"));
-        buttonContainer.style('display', 'flex');
-        buttonContainer.style('gap', '10px');
 
-        //Button for toggling edit mode
         let editButton = createButton('Toggle Edit Mode');
+        editButton.class('tool-button');
         editButton.parent(buttonContainer);
         editButton.mouseClicked(() => {
             this.editMode = !this.editMode;
         });
 
-        //Button for clearing the shape
         let clearButton = createButton('Clear Shape');
+        clearButton.class('tool-button');
         clearButton.parent(buttonContainer);
         clearButton.mouseClicked(() => {
             this.currentShape = [];
@@ -82,9 +79,9 @@ function ShapesTool() {
         });
     };
 
+    // Cleanup when tool is deselected
     this.unselectTool = function() {
         this.currentShape = [];
-        // Remove clear() and background() calls
         loadPixels();
     };
 }
