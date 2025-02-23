@@ -19,19 +19,19 @@ function EraserTool() {
                 strokeCap(PROJECT);
                 line(this.previousMouseX, this.previousMouseY, mouseX, mouseY);
                 pop();
-                // Save the erased state
+                // Saves  the erased state
                 loadPixels();
             }
             
-            // Update previous position
+            // Updates the previous position
             this.previousMouseX = mouseX;
             this.previousMouseY = mouseY;
         } else {
-            // Reset previous position when mouse is released
+            // Resets the previous position when the mouse is released
             this.previousMouseX = -1;
             this.previousMouseY = -1;
             
-            // Only draw preview circle when not erasing
+            // Only draw the preview circle when not erasing
             push();
             stroke(100);
             strokeWeight(1);

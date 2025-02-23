@@ -1,13 +1,13 @@
 function TextTool() {
     this.name = "text";
-    this.icon = "assets/text.png"; // You'll need to add a text icon
+    this.icon = "assets/text.png"; // Icon for the tool 
     
     this.fontSize = 20;
     this.currentFont = 'Arial';
     this.textContent = 'Click to type';
     this.alignment = 'left';
     
-    // Available fonts - you can add more
+    //List of fonts to choose from
     this.fonts = [
         'Arial',
         'Times New Roman',
@@ -20,7 +20,7 @@ function TextTool() {
     this.draw = function() {
         updatePixels();
         
-        // Show text preview at cursor
+        // Show text preview at cursor position
         if (!mouseIsPressed) {
             push();
             textSize(this.fontSize);
@@ -28,7 +28,7 @@ function TextTool() {
             textAlign(this.alignment === 'left' ? LEFT : 
                      this.alignment === 'center' ? CENTER : RIGHT);
             
-            // Show semi-transparent preview
+            // Show semi-transparent preview text
             let c = color(colourP.selectedColour);
             c.setAlpha(127);
             fill(c);
@@ -39,7 +39,7 @@ function TextTool() {
     };
 
     this.mousePressed = function() {
-        // Place the text permanently
+        // Places the text permanently on the canvas
         push();
         textSize(this.fontSize);
         textFont(this.currentFont);
@@ -51,7 +51,7 @@ function TextTool() {
         text(this.textContent, mouseX, mouseY);
         pop();
         
-        // Save the canvas state
+        // Saves the canvas state with the new text
         loadPixels();
     };
 
@@ -68,7 +68,7 @@ function TextTool() {
         textInput.parent(container);
         textInput.input(() => this.textContent = textInput.value());
 
-        // Font selector
+        // Font selection dropdown
         let fontSelect = createSelect();
         fontSelect.class('font-select');
         fontSelect.parent(container);
@@ -76,7 +76,7 @@ function TextTool() {
         fontSelect.selected(this.currentFont);
         fontSelect.changed(() => this.currentFont = fontSelect.value());
 
-        // Font size control
+        // Font size control slider
         let sizeGroup = createDiv();
         sizeGroup.class('tool-slider-group');
         sizeGroup.parent(container);
@@ -87,7 +87,7 @@ function TextTool() {
         sizeSlider.parent(sizeGroup);
         sizeSlider.input(() => this.fontSize = sizeSlider.value());
 
-        // Alignment buttons
+        // Alignment buttons 
         let alignGroup = createDiv();
         alignGroup.class('text-align-group');
         alignGroup.parent(container);

@@ -7,17 +7,17 @@ function ColourPalette() {
     this.loadColours = function() {
         var palette = select('.colourPalette');
         
-        // Add label
+        // Adds label
         createDiv('Current Color')
             .class('colourPicker-label')
             .parent(palette);
         
-        // Create wrapper for picker and tooltip
+        // Createswrapper for picker and tooltip
         var wrapper = createDiv()
             .class('colourPicker-wrapper')
             .parent(palette);
         
-        // Create color picker
+        // Creates the color picker
         var picker = createColorPicker('#000000');
         picker.parent(wrapper);
         picker.class('colourPicker');
@@ -37,6 +37,6 @@ function ColourPalette() {
         stroke(this.selectedColour);
     };
 
-    // Initialize on creation
+    // Initialise on creation
     this.loadColours();
 }

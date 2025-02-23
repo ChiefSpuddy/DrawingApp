@@ -1,4 +1,5 @@
 // Utility functions for common operations
+
 function HelperFunctions() {
     // Clear canvas handler
     select("#clearButton").mouseClicked(function() {

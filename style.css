@@ -1,12 +1,15 @@
-/* Base layout styles */
 html, body {
     margin: 0px;
     height: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden;
+    overflow: hidden; /* Prevents scrolling on main window */
 }
 
-/* Grid layout container */
+/* Main grid layout container
+   Creates a 3x3 grid layout with specific areas for each component:
+   - Header spans full width
+   - Sidebar and content in middle row
+   - Color palette and options at bottom */
 .wrapper {
     display: grid;
     height: 100%;
@@ -22,7 +25,9 @@ html, body {
     padding: 10px;
 }
 
-/* Header styling */
+/* Header bar styling
+   Contains app title and utility buttons
+   Uses flexbox for horizontal alignment */
 .header {
     grid-area: header;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -36,6 +41,8 @@ html, body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* App title styling
+   Prevents text selection for cleaner look */
 .app-title {
     font-size: 18px;
     font-weight: 500;
@@ -48,7 +55,8 @@ html, body {
     gap: 12px;
 }
 
-/* Main content areas */
+/* Sidebar styling - Tool icons container
+   Scrollable vertical list of tools with consistent spacing */
 #sidebar {
     grid-area: sidebar;
     overflow-y: scroll;
@@ -65,7 +73,8 @@ html, body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Sidebar tool items */
+/* Individual tool item styling in sidebar
+   Creates uniform square containers for tool icons with hover effects */
 .sideBarItem {
     max-height: 50px;
     max-width: 50px;
@@ -91,7 +100,8 @@ html, body {
     object-fit: contain;
 }
 
-/* Color palette section */
+/* Color palette section
+   Centered vertical layout for color picker and related controls */
 .colourPalette {
     grid-area: colourP;
     display: flex;
@@ -105,7 +115,8 @@ html, body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Options panel */
+/* Options panel - Tool-specific controls
+   Scrollable container for tool options with consistent padding */
 .options {
     grid-area: options;
     padding: 15px;
@@ -116,7 +127,8 @@ html, body {
     max-height: 120px; /* Match grid row height */
 }
 
-/* Button styles */
+/* Button styling
+   Consistent look for all interactive buttons with hover effects */
 .header button, .tool-button {
     background-color: #f8f9fa;
     color: #444;
@@ -156,7 +168,8 @@ html, body {
     padding: 5px;
 }
 
-/* Tooltip styles */
+/* Tooltip system
+   Shows information on hover for better user guidance */
 .tooltip {
     position: relative;
     display: inline-block;
@@ -194,7 +207,8 @@ html, body {
     opacity: 1;
 }
 
-/* Color picker styles */
+/* Color picker customization
+   Styled color input with hover effects and clear labeling */
 .colourPicker {
     width: 150px !important;
     height: 40px !important;
@@ -222,7 +236,8 @@ html, body {
     align-items: center;
 }
 
-/* Stamp tool specific styles */
+/* Stamp tool specific layouts
+   Custom controls for emoji stamp functionality */
 .stamp-container {
     display: flex;
     flex-wrap: wrap;
@@ -230,6 +245,8 @@ html, body {
     padding: 10px;
 }
 
+/* Custom dropdown styling for emoji selector
+   Consistent with overall UI design */
 .emoji-select-container {
     width: 80px;
 }
@@ -268,7 +285,8 @@ html, body {
     text-align: center;
 }
 
-/* Stamp tool slider styles */
+/* Slider controls
+   Unified styling for all range inputs across tools */
 .stamp-controls {
     flex: 1;
     display: flex;
@@ -309,7 +327,8 @@ html, body {
     cursor: pointer;
 }
 
-/* Eraser tool styles */
+/* Slider controls
+   Unified styling for all range inputs across tools */
 .tool-slider {
     width: 200px;
     height: 4px;
@@ -345,7 +364,8 @@ html, body {
     color: #666;
 }
 
-/* Text Tool Styles */
+/* Text tool specific styles
+   Controls for text input, font selection, and alignment */
 .text-input {
     width: 100%;
     padding: 8px;
@@ -385,7 +405,8 @@ html, body {
     border-color: #666;
 }
 
-/* Shape Tool Styles */
+/* Shape tool specific styles
+   Custom controls for shape drawing functionality */
 .shape-select {
     width: 100%;
     padding: 8px;
@@ -410,7 +431,8 @@ html, body {
     box-shadow: 0 0 0 2px rgba(102,102,102,0.1);
 }
 
-/* Checkbox styling */
+/* Checkbox styling
+   Consistent look for boolean options across tools */
 .tool-checkbox {
     display: flex;
     align-items: center;

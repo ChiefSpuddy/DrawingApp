@@ -6,7 +6,7 @@ function mirrorDrawTool() {
 
     // Mirror configuration
     this.axis = "x";  // Current mirror axis
-    this.lineOfSymmetry = width / 2;  // Position of mirror line
+    this.lineOfSymmetry = width / 2;  // position of mirror line
 
     var self = this;
 
@@ -16,7 +16,7 @@ function mirrorDrawTool() {
     var previousOppositeMouseX = -1;
     var previousOppositeMouseY = -1;
 
-    // Draw mirrored lines
+    //draw mirrored lines
     this.draw = function() {
         //display the last save state of pixels
         updatePixels();
@@ -73,7 +73,7 @@ function mirrorDrawTool() {
         pop();
     };
 
-    // Calculate mirrored point position
+    //Calculate mirrored point position
     this.calculateOpposite = function(n, a) {
         if (a != this.axis) {
             return n;
@@ -96,11 +96,11 @@ function mirrorDrawTool() {
     // Cleanup when tool is deselected
     this.unselectTool = function() {
         updatePixels();
-        //clear options
+        // Clear options
         select(".options").html("");
     };
 
-    // Create mirror tool interface
+    // Creates the mirror tool interface
     this.populateOptions = function() {
         let buttonContainer = createDiv();
         buttonContainer.class('tool-button-container');

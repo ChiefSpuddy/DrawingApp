@@ -32,12 +32,12 @@ function ScissorsTool() {
         }
     };
 
-    // Create dashed line effect for selection rectangle
+    // Creates the dashed line effect for the selection rectangle
     function setLineDash(list) {
         drawingContext.setLineDash(list);
     }
 
-    // Handle start of selection or paste operation
+    //Handles start of the selection, or the paste operation
     this.mousePressed = function() {
         if(this.selectMode === 1 && !this.selectedArea.isDrawn) {
             loadPixels();
@@ -56,7 +56,7 @@ function ScissorsTool() {
         }
     };
 
-    // Update selection size while dragging
+    // Updates the selection size while dragging mouse
     this.mouseDragged = function() {
         if(this.selectMode === 1 && !this.selectedArea.isDrawn) {
             this.selectedArea.w = mouseX - this.selectedArea.x;
@@ -64,10 +64,10 @@ function ScissorsTool() {
         }
     };
 
-    // Finalize selection area
+    // Finalises selection area
     this.mouseReleased = function() {
         if(this.selectMode === 1 && !this.selectedArea.isDrawn) {
-            // Normalize selection coordinates
+            // Normalise selection coordinates
             let x = this.selectedArea.x;
             let y = this.selectedArea.y;
             let w = this.selectedArea.w;
@@ -82,19 +82,19 @@ function ScissorsTool() {
                 h = Math.abs(h);
             }
             
-            // Update selectedArea with normalized coordinates
+            // Updates selectedArea with normalised coordinates
             this.selectedArea.x = x;
             this.selectedArea.y = y;
             this.selectedArea.w = w;
             this.selectedArea.h = h;
-            this.selectedArea.isDrawn = true;  // Mark the selection as complete
+            this.selectedArea.isDrawn = true;  // Marks the selection as complete
         }
     };
 
-    // Handle escape key to cancel operation
+    // Press esc key to cancel selection
     this.keyPressed = function(event) {
-        // Check if Escape key is pressed
-        if (event.keyCode === 27) { // 27 is the keyCode for Escape
+        // Checks if Esc key is pressed
+        if (event.keyCode === 27) { // 27 = esc key
             this.selectMode = 0;
             this.selectedArea = {
                 x: 0, 
@@ -103,7 +103,7 @@ function ScissorsTool() {
                 h: 0, 
                 isDrawn: false
             };
-            // Update button text if it exists
+            // Updates button text if it exists
             let button = document.querySelector('.options .tool-button');
             if (button) {
                 button.innerHTML = "Select Area";
@@ -113,13 +113,13 @@ function ScissorsTool() {
         }
     };
 
-    // Create scissors tool interface
+    // Creates thescissors tool interface
     this.populateOptions = function() {
         var optionsDiv = document.querySelector(".options");
         if (!optionsDiv) return;
         optionsDiv.innerHTML = "";
         
-        // Create button container
+        // Creates a button container
         var buttonContainer = document.createElement('div');
         buttonContainer.className = 'tool-button-container';
         
@@ -149,18 +149,18 @@ function ScissorsTool() {
                 let w = self.selectedArea.w;
                 let h = self.selectedArea.h;
 
-                updatePixels(); // Restore clean background without selection rectangle
-                // Capture the selected area
+                updatePixels(); // Restores a clean background without selection rectangle
+                // Captures the selected area
                 self.selectedPixels = get(x, y, w, h);
                 
-                // Clear the selected area
+                // Clears the selected area
                 push();
                 fill(255);
                 noStroke();
                 rect(x, y, w, h);
                 pop();
                 
-                loadPixels(); // Save the state with cleared area
+                loadPixels(); // Saves the state with the cleared area
                 self.selectMode = 2;
                 button.innerHTML = "End Paste";
             }
@@ -180,7 +180,7 @@ function ScissorsTool() {
         });
     };
 
-    // Cleanup when tool is deselected
+    // Performs a Cleanup when tool is deselected
     this.unselectTool = function() {
         select(".options").html("");
         this.selectMode = 0;

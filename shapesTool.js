@@ -1,21 +1,21 @@
-// Tool for drawing and editing custom shapes
+// Tools for drawing and editing custom shapes
 function ShapesTool() {
     // Tool identification and state
     this.name = "shapes";
-    this.icon = "assets/shapes.png";
+    this.icon = "assets/shapes.png"; // Icon for the tool
     this.editMode = false;
     this.currentShape = [];
 
-    // Main drawing and shape manipulation function
+    // The main drawing and shape manipulation function
     this.draw = function() {
-        // Prevent drawing outside canvas
+        // Prevents drawing outside the canvas.
         if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) {
             return;
         }
 
-        updatePixels(); // Restore previous state
+        updatePixels(); // Restores the previous state
         
-        // Render current shape and edit points
+        // Renders the current shape and edit points
         if (this.currentShape.length > 0) {
             push();
             strokeWeight(2);
@@ -37,7 +37,7 @@ function ShapesTool() {
             pop();
         }
         
-        // Handle point addition and editing
+        // Handles point addition and editing
         if (mouseIsPressed) {
             if (!this.editMode) {
                 this.currentShape.push({ x: mouseX, y: mouseY });

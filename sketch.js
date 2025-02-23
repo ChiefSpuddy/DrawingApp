@@ -16,40 +16,40 @@ function setup() {
     toolbox = new Toolbox();
 
     // Add all drawing tools
-    toolbox.addTool(new FreehandTool());
-    toolbox.addTool(new LineToTool());
-    toolbox.addTool(new SprayCanTool());
-    toolbox.addTool(new mirrorDrawTool());
-    toolbox.addTool(new StampTool());
-    toolbox.addTool(new ShapeDrawTool()); // Add new shape drawing tool
-    toolbox.addTool(new ScissorsTool());
-    toolbox.addTool(new EraserTool()); // Add the new eraser tool
-    toolbox.addTool(new TextTool()); // Add the text tool
+    toolbox.addTool(new FreehandTool()); // Draw Tool
+    toolbox.addTool(new LineToTool()); // Line Tool
+    toolbox.addTool(new SprayCanTool()); // Spray Can Tool
+    toolbox.addTool(new mirrorDrawTool()); // Mirror Draw Tool
+    toolbox.addTool(new StampTool()); // Stamp Tool
+    toolbox.addTool(new ShapeDrawTool()); // Shape Drawing tool
+    toolbox.addTool(new ScissorsTool()); // Scissors Tool
+    toolbox.addTool(new EraserTool()); // Eraser Tool
+    toolbox.addTool(new TextTool()); // Text tool
 
-    // Set up initial canvas state
+    // Set up canvas
     background(255);
     loadPixels();
 
-    // Update clear button listener to just clear the canvas
+    // Updates theclear button listener to just clear the canvas
     select('#clearButton').mouseClicked(function() {
         background(255);
         loadPixels();
     });
 
-    // Add save functionality
+    // Ssave function to save the drawing
     select('#saveImageButton').mouseClicked(function() {
         saveCanvas('myDrawing', 'png');
     });
 }
 
-// Main draw loop - handles active tool drawing
+// Main draw loop
 function draw() {
     if (toolbox && toolbox.selectedTool && toolbox.selectedTool.hasOwnProperty("draw")) {
         toolbox.selectedTool.draw();
     }
 }
 
-// Mouse event handlers - delegate to active tool
+// Mouse event handlers
 function mousePressed() {
     if (toolbox && toolbox.selectedTool && toolbox.selectedTool.hasOwnProperty("mousePressed")) {
         toolbox.selectedTool.mousePressed();
@@ -74,7 +74,7 @@ function keyPressed() {
     }
 }
 
-// Simplify error handler to just log the error message
+// Simplifies error handler to log the error message
 window.onerror = function(msg) {
     console.error('Error:', msg);
     return false;

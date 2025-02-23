@@ -18,7 +18,7 @@ function FreehandTool() {
     this.populateOptions = function() {
         select(".options").html("");
         
-        // Create container for all controls
+        // Creates a container for all of the controls
         let container = createDiv();
         container.class('tool-options-container');
         container.parent(select(".options"));
@@ -34,7 +34,7 @@ function FreehandTool() {
         thicknessSlider.parent(sizeGroup);
         thicknessSlider.input(() => this.lineThickness = thicknessSlider.value());
         
-        // Line opacity controls - make sure this group is visible
+        // Line opacity controls
         let opacityGroup = createDiv();
         opacityGroup.class('tool-slider-group');
         opacityGroup.parent(container);
@@ -48,7 +48,7 @@ function FreehandTool() {
 
     this.unselectTool = function() {
         strokeWeight(1);
-        stroke(0, 0, 0, 255); // Reset to fully opaque
+        stroke(0, 0, 0, 255); // Reset to be completely opaque!
         select(".options").html("");
     };
 }

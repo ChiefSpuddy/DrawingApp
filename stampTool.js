@@ -1,15 +1,15 @@
 function StampTool() {
     // Tool identification
     this.name = "stampTool";
-    this.icon = "assets/emoji.png";  // Changed from star.png to emoji.png
+    this.icon = "assets/emoji.png"; // icon for the stamp tool
     
-    // Store current stamp image and settings
+    // to Store current stamp image and settings
     this.star = null;
     this.starSizeSlider = null;
     this.nStarSlider = null;
     this.transparencySlider = null;
     
-    // Control rapid stamping
+    // Prevents rapid stamping of emojis to allow 1 stamp at a time 
     this.lastStampTime = 0;
     const STAMP_DELAY = 150;
     
@@ -30,7 +30,7 @@ function StampTool() {
         dropdown.class('emoji-select');
         dropdown.parent(dropdownDiv);
         
-        // Organized emoji list
+        // Organised emoji list by category
         const emojiCategories = {
             "Galaxy": ['⭐', '🌟', '💫', '✨', '🌍', '🌎', '🌏', '🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘', '🪐', '☄️'],
             "Nature": ['🌸', '🌺', '🍀', '🌿', '🌳', '🦋', '🐝'],
@@ -42,7 +42,7 @@ function StampTool() {
             "Special": ['🎉', '✨', '🎊', '🌟'] // Added new category with celebrate emoji
         };
 
-        // Create optgroups for each category
+        // Create groups for each category
         for (let category in emojiCategories) {
             let group = createElement('optgroup');
             group.attribute('label', category);
@@ -58,7 +58,7 @@ function StampTool() {
         
         dropdown.selected('⭐');
         
-        // Handle emoji changes
+        // Handles emoji changes
         let self = this;
         dropdown.changed(function() {
             let selectedEmoji = this.value();
@@ -68,18 +68,18 @@ function StampTool() {
             self.star.text(selectedEmoji, 25, 25);
         });
         
-        // Initial emoji setup
+        // First emoji setup
         self.star = createGraphics(50, 50);
         self.star.textSize(40);
         self.star.textAlign(CENTER, CENTER);
         self.star.text('⭐', 25, 25);
 
-        // Create container for sliders
+        // Creates a container for the option sliders
         let controlsContainer = createDiv();
         controlsContainer.class('stamp-controls');
         controlsContainer.parent(container);
 
-        // Create slider groups
+        // Creates 3 slider groups
         let sizeGroup = createDiv();
         sizeGroup.class('stamp-slider-group');
         createP('Size').parent(sizeGroup);
@@ -105,14 +105,14 @@ function StampTool() {
         opacityGroup.parent(controlsContainer);
     };
   
-    // Handle stamping on canvas
+    // Handles stamping onto the canvas
     this.draw = function() {
         if (mouseIsPressed && this.star) {
             if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
                 let currentTime = millis();
                 let nStars = this.nStarSlider.value();
                 
-                // Only draw if enough time has passed or if multiple stamps are allowed
+                // Only allows drawing if enough time has passed (or if multiple stamps are allowed)
                 if (currentTime - this.lastStampTime >= STAMP_DELAY || nStars > 1) {
                     let starSize = this.starSizeSlider.value();
                     let transparency = this.transparencySlider.value();
