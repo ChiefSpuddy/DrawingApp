@@ -1,0 +1,169 @@
+html, body {
+  margin: 0px;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#sidebar {
+  grid-area: sidebar;
+  overflow-y: scroll;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 10px;
+}
+
+#content {
+  grid-area: content;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header {
+  grid-area: header;
+  font-family: Helvetica, sans-serif;
+  background-color: #444;
+  color: white;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.header button:hover {
+  background-color: #666;
+  transform: translateY(-2px);
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.sideBarItem {
+  max-height: 50px;
+  max-width: 50px;
+  padding: 5px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sideBarItem:hover {
+  background-color: #e9ecef;
+}
+
+.sideBarItem img {
+  max-height: 40px;
+  max-width: 40px;
+  object-fit: contain;
+}
+
+.colourPalette {
+  grid-area: colourP;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  max-height: 160px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.options {
+  grid-area: options;
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.colourSwatches {
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  max-height: 40px;
+  max-width: 40px;
+  margin: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.colourSwatches:hover {
+  transform: scale(1.1);
+}
+
+.wrapper {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 70px 230px minmax(500px, 1fr);
+  grid-template-rows: 50px minmax(500px, 1fr) 120px;
+  grid-template-areas:
+    "header header header"
+    "sidebar content content"
+    "colourP colourP options";
+  background-color: #f5f5f5;
+  color: #333;
+  gap: 10px;
+  padding: 10px;
+}
+
+.box {
+  background-color: #444;
+  color: #fff;
+  font-size: 150%;
+}
+
+/* Add tooltip styles */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: auto;
+  top: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* Fade effect */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

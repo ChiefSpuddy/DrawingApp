@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="lib/p5.min.js"></script>
+    <script src="lib/p5.dom.js"></script>
+    <script src="ShapesTool.js"></script>
+
+    <script src="sketch.js"></script>
+
+    <!-- add extra scripts below -->
+    <script src="toolbox.js"></script>
+    <script src="colourPalette.js"></script>
+    <script src="helperFunctions.js"></script>
+    <script src="freehandTool.js"></script>
+    <script src="lineToTool.js"></script>
+    <script src="sprayCanTool.js"></script>
+    <script src="mirrorDrawTool.js"></script>
+    <script src="StampTool.js"></script>
+    <script src="scissorsTool.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  	<div class="wrapper">
+      <div class="box header">
+        <div class="app-title">Drawing App</div>
+        <div class="header-buttons">
+          <div class="tooltip">
+            <button id="clearButton">🗑️</button>
+            <span class="tooltiptext">Clear</span>
+          </div>
+          <div class="tooltip">
+            <button id="saveImageButton">💾</button>
+            <span class="tooltiptext">Save</span>
+          </div>
+        </div>
+      </div>
+      <div class="box" id="sidebar"></div>
+      <div id="content"></div>
+      <div class="box colourPalette"></div>
+      <div class="box options"></div>
+	</div>
+  </body>
+</html>
