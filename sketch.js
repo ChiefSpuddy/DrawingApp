@@ -23,6 +23,7 @@ function setup() {
     toolbox.addTool(new StampTool());
     toolbox.addTool(new ShapesTool("icons/shapes.png"));
     toolbox.addTool(new ScissorsTool());
+    toolbox.addTool(new EraserTool()); // Add the new eraser tool
 
     // Set up initial canvas state
     background(255);

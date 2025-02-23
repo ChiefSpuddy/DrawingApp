@@ -306,3 +306,25 @@ html, body {
     border-radius: 50%;
     cursor: pointer;
 }
+
+/* Eraser tool styles */
+.tool-slider {
+    width: 200px;
+    height: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    outline: none;
+    border-radius: 2px;
+    margin: 10px 0;
+}
+
+.tool-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #666;
+    border-radius: 50%;
+    cursor: pointer;
+}
