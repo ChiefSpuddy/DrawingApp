@@ -2,6 +2,7 @@ html, body {
   margin: 0px;
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden; /* Prevent scrolling */
 }
 
 #sidebar {
@@ -65,6 +66,7 @@ html, body {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
 .sideBarItem:hover {
@@ -77,16 +79,38 @@ html, body {
   object-fit: contain;
 }
 
+.sideBarItem .tooltiptext {
+  position: absolute;
+  left: 120%;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  background: #333;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1000;
+}
+
+.sideBarItem:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
 .colourPalette {
   grid-area: colourP;
   display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  max-height: 160px;
-  overflow-y: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
   background-color: white;
   border-radius: 8px;
-  padding: 10px;
+  padding: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -130,9 +154,18 @@ html, body {
 }
 
 .box {
-  background-color: #444;
-  color: #fff;
   font-size: 150%;
+}
+
+/* Add app title styles */
+.app-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 /* Add tooltip styles */
@@ -166,4 +199,62 @@ html, body {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+.colourPicker {
+  width: 150px !important;
+  height: 40px !important;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.colourPicker:hover {
+  transform: scale(1.05);
+}
+
+.colourPicker-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.colourPicker-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.colourPicker-tooltip {
+  position: absolute;
+  top: -30px;
+  background: #333;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.colourPicker-wrapper:hover .colourPicker-tooltip {
+  opacity: 1;
+}
+
+/* Debug outlines - remove after fixing layout */
+.debug .box {
+    border: 1px solid red;
+}
+
+.debug #sidebar {
+    border: 1px solid blue;
+}
+
+.debug #content {
+    border: 1px solid green;
 }
