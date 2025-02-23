@@ -112,6 +112,8 @@ html, body {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow-y: auto; /* Enable scrolling */
+    max-height: 120px; /* Match grid row height */
 }
 
 /* Button styles */
@@ -327,4 +329,58 @@ html, body {
     background: #666;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.tool-slider-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tool-slider-group p {
+    min-width: 100px; /* Make labels wider for "Line Thickness" and "Opacity" */
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Text Tool Styles */
+.text-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.font-select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.text-align-group {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.text-align-button {
+    flex: 1;
+    padding: 6px 12px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.text-align-button.active {
+    background: #e9ecef;
+    border-color: #666;
 }

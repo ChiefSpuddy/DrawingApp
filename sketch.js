@@ -24,6 +24,7 @@ function setup() {
     toolbox.addTool(new ShapesTool("icons/shapes.png"));
     toolbox.addTool(new ScissorsTool());
     toolbox.addTool(new EraserTool()); // Add the new eraser tool
+    toolbox.addTool(new TextTool()); // Add the text tool
 
     // Set up initial canvas state
     background(255);

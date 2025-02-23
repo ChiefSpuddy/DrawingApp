@@ -1,38 +1,54 @@
-function FreehandTool(){
-	//set an icon and a name for the object
-	this.icon = "assets/freehand.jpg";
-	this.name = "freehand";
+function FreehandTool() {
+    this.name = "freehand";
+    this.icon = "assets/freehand.jpg";
+    
+    this.lineThickness = 1;
+    this.lineOpacity = 255; // Add opacity property (0-255)
+    
+    this.draw = function() {
+        if(mouseIsPressed) {
+            let currentColor = color(colourP.selectedColour);
+            currentColor.setAlpha(this.lineOpacity); // Set transparency
+            stroke(currentColor);
+            strokeWeight(this.lineThickness);
+            line(pmouseX, pmouseY, mouseX, mouseY);
+        }
+    };
 
-	//to smoothly draw we'll draw a line from the previous mouse location
-	//to the current mouse location. The following values store
-	//the locations from the last frame. They are -1 to start with because
-	//we haven't started drawing yet.
-	var previousMouseX = -1;
-	var previousMouseY = -1;
+    this.populateOptions = function() {
+        select(".options").html("");
+        
+        // Create container for all controls
+        let container = createDiv();
+        container.class('tool-options-container');
+        container.parent(select(".options"));
+        
+        // Line thickness controls
+        let sizeGroup = createDiv();
+        sizeGroup.class('tool-slider-group');
+        sizeGroup.parent(container);
+        
+        createP('Line Thickness').parent(sizeGroup);
+        let thicknessSlider = createSlider(1, 50, this.lineThickness);
+        thicknessSlider.class('tool-slider');
+        thicknessSlider.parent(sizeGroup);
+        thicknessSlider.input(() => this.lineThickness = thicknessSlider.value());
+        
+        // Line opacity controls - make sure this group is visible
+        let opacityGroup = createDiv();
+        opacityGroup.class('tool-slider-group');
+        opacityGroup.parent(container);
+        
+        createP('Opacity').parent(opacityGroup);
+        let opacitySlider = createSlider(0, 255, this.lineOpacity);
+        opacitySlider.class('tool-slider');
+        opacitySlider.parent(opacityGroup);
+        opacitySlider.input(() => this.lineOpacity = opacitySlider.value());
+    };
 
-	this.draw = function(){
-		//if the mouse is pressed
-		if(mouseIsPressed){
-			//check if they previousX and Y are -1. set them to the current
-			//mouse X and Y if they are.
-			if (previousMouseX == -1){
-				previousMouseX = mouseX;
-				previousMouseY = mouseY;
-			}
-			//if we already have values for previousX and Y we can draw a line from 
-			//there to the current mouse location
-			else{
-				line(previousMouseX, previousMouseY, mouseX, mouseY);
-				previousMouseX = mouseX;
-				previousMouseY = mouseY;
-			}
-		}
-		//if the user has released the mouse we want to set the previousMouse values 
-		//back to -1.
-		//try and comment out these lines and see what happens!
-		else{
-			previousMouseX = -1;
-			previousMouseY = -1;
-		}
-	};
+    this.unselectTool = function() {
+        strokeWeight(1);
+        stroke(0, 0, 0, 255); // Reset to fully opaque
+        select(".options").html("");
+    };
 }
