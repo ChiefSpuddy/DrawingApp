@@ -1,7 +1,7 @@
 function StampTool() {
     // Tool identification
     this.name = "stampTool";
-    this.icon = "assets/star.png";
+    this.icon = "assets/emoji.png";  // Changed from star.png to emoji.png
     
     // Store current stamp image and settings
     this.star = null;
@@ -38,7 +38,8 @@ function StampTool() {
             "Hearts": ['❤️', '💖', '💙', '💚', '💛', '💜'],
             "Faces": ['😊', '😄', '🥰', '😎', '🤩', '😺'],
             "Symbols": ['💫', '💥', '💢', '💨', '🎵', '🎶'],
-            "Objects": ['🎨', '🖌️', '✏️', '📝', '🎭', '🎪']
+            "Objects": ['🎨', '🖌️', '✏️', '📝', '🎭', '🎪'],
+            "Special": ['🎉', '✨', '🎊', '🌟'] // Added new category with celebrate emoji
         };
 
         // Create optgroups for each category

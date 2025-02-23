@@ -21,7 +21,7 @@ function setup() {
     toolbox.addTool(new SprayCanTool());
     toolbox.addTool(new mirrorDrawTool());
     toolbox.addTool(new StampTool());
-    toolbox.addTool(new ShapesTool("icons/shapes.png"));
+    toolbox.addTool(new ShapeDrawTool()); // Add new shape drawing tool
     toolbox.addTool(new ScissorsTool());
     toolbox.addTool(new EraserTool()); // Add the new eraser tool
     toolbox.addTool(new TextTool()); // Add the text tool
